@@ -4,8 +4,7 @@ import { StepOne } from "./components/stepOne";
 import { StepTwo } from "./components/stepTwo";
 import { StepThree } from "./components/stepThree";
 import { FinalPage } from "./components/final";
-import { useFormik } from "formik";
-import { schema } from "@/app/Schemas/schema";
+
 
 export default function Home() {
   const [steps, setSteps] = useState(1);
@@ -20,20 +19,8 @@ export default function Home() {
     dateOfBirth: "",
     img: "",
   });
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      userName: "",
-      email: "",
-      phoneNumber: "",
-      password: "",
-      confirmPassword: "",
-      dateOfBirth: "",
-      img: "",
-    },
-  });
-  const { errors, touched, values, handleChange, handleSubmit } = formik;
+
+
 
   const onChange = (e) => {
     const field = e.target.id;
