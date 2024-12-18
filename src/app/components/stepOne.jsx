@@ -1,5 +1,5 @@
 import Image from "next/image";
-export function StepOne({ setSteps }) {
+export function StepOne({ setSteps, onChange }) {
   return (
     <div className="w-[30rem] h-[41rem] mx-auto mt-[20vh] bg-white rounded-[0.5rem] flex flex-col">
       <div>
@@ -10,9 +10,11 @@ export function StepOne({ setSteps }) {
             Please provide all current information accurately.
           </p>
         </div>
-        <div className="w-[26rem] h-fit mt-[2rem] mx-auto ">
+        <form className="w-[26rem] h-fit mt-[2rem] mx-auto ">
           <p className="text-[0.875rem] font-semibold ">First name *</p>
           <input
+            id="firstName"
+            onChange={onChange}
             placeholder="First name"
             className="w-[26rem] h-[2.75rem] border-[1px] rounded-[0.5rem] p-[0.75rem] mt-[0.2rem]"
             type="name"
@@ -21,6 +23,8 @@ export function StepOne({ setSteps }) {
             Last name *
           </p>
           <input
+            id="lastName"
+            onChange={onChange}
             placeholder="Last name"
             className="w-[26rem] h-[2.75rem] border-[1px] rounded-[0.5rem] p-[0.75rem] mt-[0.2rem]"
           ></input>
@@ -28,10 +32,12 @@ export function StepOne({ setSteps }) {
             Username *
           </p>
           <input
+            id="userName"
+            onChange={onChange}
             placeholder="Username"
             className="w-[26rem] h-[2.75rem] border-[1px] rounded-[0.5rem] p-[0.75rem] mt-[0.2rem]"
           ></input>
-        </div>
+        </form>
       </div>
       <button
         onClick={() => {
