@@ -1,8 +1,15 @@
 import Image from "next/image";
-export function StepOne({ setSteps, onChange }) {
+export function StepOne({ setSteps, onChange, form }) {
+  const regex = /[1234567890-=_+{}:;"'<,>.!@#%&()]/;
+  const validationForm = (field, message) => {
+    if (regex.test(form[field])) {
+      return message;
+    }
+  };
+  console.log(form);
   return (
     <div className="w-[30rem] h-[41rem] mx-auto mt-[20vh] bg-white rounded-[0.5rem] flex flex-col">
-      <div>
+      <div className="max-h-[380px]">
         <div className="w-[26rem] h-[8rem] mx-auto pt-[1rem]">
           <Image width={60} height={60} src={"/logo.png"} alt="Logo" />
           <h1 className="text-[#202124] font-bold text-[26px]">Join Us! 😎</h1>
@@ -19,6 +26,9 @@ export function StepOne({ setSteps, onChange }) {
             className="w-[26rem] h-[2.75rem] border-[1px] rounded-[0.5rem] p-[0.75rem] mt-[0.2rem]"
             type="name"
           ></input>
+          <div className="text-[#E14942]">
+            {validationForm("firstName", "Please, enter a valid name")}
+          </div>
           <p className="text-[0.875rem] font-semibold mt-[0.5rem]">
             Last name *
           </p>
@@ -28,6 +38,10 @@ export function StepOne({ setSteps, onChange }) {
             placeholder="Last name"
             className="w-[26rem] h-[2.75rem] border-[1px] rounded-[0.5rem] p-[0.75rem] mt-[0.2rem]"
           ></input>
+          <div className="text-[#E14942]">
+            {validationForm("lastName", "Please, enter a valid name")}
+          </div>
+
           <p className="text-[0.875rem] font-semibold mt-[0.5rem]">
             Username *
           </p>
@@ -37,6 +51,9 @@ export function StepOne({ setSteps, onChange }) {
             placeholder="Username"
             className="w-[26rem] h-[2.75rem] border-[1px] rounded-[0.5rem] p-[0.75rem] mt-[0.2rem]"
           ></input>
+          <div className="text-[#E14942]">
+            {validationForm("userName", "Please, enter a valid name")}
+          </div>
         </form>
       </div>
       <button
