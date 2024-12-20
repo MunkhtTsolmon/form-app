@@ -32,9 +32,9 @@ export default function Home() {
       {steps === 1 ? (
         <StepOne form={form} onChange={onChange} setSteps={setSteps} />
       ) : steps === 2 ? (
-        <StepTwo onChange={onChange} setSteps={setSteps} />
+        <StepTwo form={form} onChange={onChange} setSteps={setSteps} />
       ) : steps === 3 ? (
-        <StepThree onChange={onChange} setSteps={setSteps} />
+        <StepThree form={form} onChange={onChange} setSteps={setSteps} />
       ) : (
         <FinalPage />
       )}
