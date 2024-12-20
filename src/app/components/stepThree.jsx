@@ -7,26 +7,22 @@ import Image from "next/image";
 export function StepThree({ setSteps, onChange, form }) {
   const [imagePreview, setImagePreview] = useState(null);
 
-  // Handle file drop for the profile image
   const handleDrop = (acceptedFiles) => {
     const file = acceptedFiles[0];
+    console.log(file);
+    if (!file) return;
+    const fileEvent = {
+      target: { value: file, id: "img" },
+    };
+    onChange(fileEvent);
     if (file && file.type.startsWith("image/")) {
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
-      onChange({ target: { id: "img", value: file } }); // Pass file data to parent form
     }
   };
 
-  // Validation function for dateOfBirth
-  const isValidDate = (dateString) => {
-    const today = new Date();
-    const inputDate = new Date(dateString);
-    return inputDate <= today;
-  };
-
-  // Check overall form validity
   const isFormValid = () => {
-    return form.dateOfBirth && isValidDate(form.dateOfBirth) && form.img;
+    return form.dateOfBirth && imagePreview;
   };
 
   return (
@@ -42,6 +38,8 @@ export function StepThree({ setSteps, onChange, form }) {
         <form className="w-[26rem] h-fit mt-[2rem] mx-auto ">
           <p className="text-[0.875rem] font-semibold ">Date of birth *</p>
           <input
+            min="1900-01-01"
+            max="2024-12-20"
             onChange={onChange}
             id="dateOfBirth"
             placeholder="dateOfBirth"
@@ -49,7 +47,7 @@ export function StepThree({ setSteps, onChange, form }) {
             type="date"
           />
           <div className="text-[#E14942]">
-            {form.dateOfBirth && !isValidDate(form.dateOfBirth) && "Invalid date"}
+            {!form.dateOfBirth && "Invalid date"}
           </div>
 
           <p className="text-[0.875rem] font-semibold mt-[1rem]">
@@ -62,7 +60,7 @@ export function StepThree({ setSteps, onChange, form }) {
                   {...getRootProps()}
                   className="w-[416px] h-[180px] bg-[#7F7F800D] flex justify-center items-center flex-col gap-[10px] rounded-md mt-[0.2rem]"
                 >
-                  <input {...getInputProps()} id="img" />
+                  <input onChange={onChange} {...getInputProps()} id="img" />
                   {imagePreview ? (
                     <img
                       src={imagePreview}
@@ -93,7 +91,7 @@ export function StepThree({ setSteps, onChange, form }) {
             )}
           </Dropzone>
           <div className="text-[#E14942]">
-            {!form.img && "Please upload a profile image"}
+            {!imagePreview && "Please upload a profile image"}
           </div>
         </form>
       </div>
@@ -112,9 +110,9 @@ export function StepThree({ setSteps, onChange, form }) {
             setSteps(4);
           }}
           className={`w-[17.5rem] h-[2.75rem] rounded-[6px] font-medium ${
-            isFormValid()
-              ? "bg-[black] text-white"
-              : "bg-[#D6D8DB] text-[#8E8E8E]"
+            !isFormValid()
+              ? "bg-[#D6D8DB] text-#8E8E8E"
+              : "bg-[black] text-[white]"
           }`}
         >
           Submit 3/3
@@ -123,4 +121,3 @@ export function StepThree({ setSteps, onChange, form }) {
     </div>
   );
 }
-

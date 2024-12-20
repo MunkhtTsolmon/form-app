@@ -36,7 +36,7 @@ export default function Home() {
       ) : steps === 3 ? (
         <StepThree form={form} onChange={onChange} setSteps={setSteps} />
       ) : (
-        <FinalPage />
+        <FinalPage form={form} />
       )}
     </div>
   );
