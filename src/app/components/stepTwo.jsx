@@ -2,9 +2,15 @@ import Image from "next/image";
 
 export function StepTwo({ setSteps, onChange, form }) {
   const regex = /[-=_+{}:;"'<,>!#%&()]/;
+  const regexPhoneNumber = /[A-Z, a-z, {}:;"'<,>!#%&()]/;
 
   const validationForm = (field, message) => {
     if (!form[field] || regex.test(form[field])) {
+      return message;
+    }
+  };
+  const validationFormPhoneNumber = (field, message) => {
+    if (!form[field] || regexPhoneNumber.test(form[field])) {
       return message;
     }
   };
@@ -54,7 +60,10 @@ export function StepTwo({ setSteps, onChange, form }) {
             className="w-[26rem] h-[2.75rem] border-[1px] rounded-[0.5rem] p-[0.75rem] mt-[0.2rem]"
           />
           <div className="text-[#E14942]">
-            {validationForm("phoneNumber", "Please enter a valid phone number")}
+            {validationFormPhoneNumber(
+              "phoneNumber",
+              "Please enter a valid phone number"
+            )}
           </div>
 
           <p className="text-[0.875rem] font-semibold mt-[0.5rem]">
