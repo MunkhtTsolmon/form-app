@@ -18,13 +18,14 @@ export function StepThree({ setSteps, onChange, form }) {
     if (file && file.type.startsWith("image/")) {
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
+      console.log(previewUrl);
     }
   };
 
   const isFormValid = () => {
     return form.dateOfBirth && imagePreview;
   };
-
+  console.log(imagePreview);
   return (
     <div className="w-[30rem] h-[41rem] mx-auto mt-[20vh] bg-white rounded-[0.5rem] flex flex-col">
       <div>

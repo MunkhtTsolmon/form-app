@@ -1,14 +1,13 @@
 import Image from "next/image";
 
 export function StepTwo({ setSteps, onChange, form }) {
-  const regex = /[1234567890-=_+{}:;"'<,>.!@#%&()]/;
+  const regex = /[-=_+{}:;"'<,>!#%&()]/;
 
-  
   const validationForm = (field, message) => {
     if (!form[field] || regex.test(form[field])) {
       return message;
     }
-  }
+  };
 
   const isFormValid = () => {
     const fields = ["email", "phoneNumber", "password", "confirmPassword"];
@@ -16,7 +15,9 @@ export function StepTwo({ setSteps, onChange, form }) {
       (field) => form[field] && !regex.test(form[field])
     );
     const isPasswordMatching =
-      form.password && form.confirmPassword && form.password === form.confirmPassword;
+      form.password &&
+      form.confirmPassword &&
+      form.password === form.confirmPassword;
     return areFieldsValid && isPasswordMatching;
   };
 
@@ -56,7 +57,9 @@ export function StepTwo({ setSteps, onChange, form }) {
             {validationForm("phoneNumber", "Please enter a valid phone number")}
           </div>
 
-          <p className="text-[0.875rem] font-semibold mt-[0.5rem]">Password *</p>
+          <p className="text-[0.875rem] font-semibold mt-[0.5rem]">
+            Password *
+          </p>
           <input
             id="password"
             onChange={onChange}
@@ -79,8 +82,7 @@ export function StepTwo({ setSteps, onChange, form }) {
             type="password"
           />
           <div className="text-[#E14942]">
-            {form.password !== form.confirmPassword &&
-              "Passwords do not match"}
+            {form.password !== form.confirmPassword && "Passwords do not match"}
           </div>
         </form>
       </div>
@@ -110,4 +112,3 @@ export function StepTwo({ setSteps, onChange, form }) {
     </div>
   );
 }
-
